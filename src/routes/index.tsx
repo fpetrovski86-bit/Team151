@@ -188,24 +188,44 @@ function Home() {
 
 
       {/* Галерија */}
-      <section id="galerija" className="section-pad bg-secondary/40 px-5">
-        <div className="mx-auto max-w-7xl">
-          <SectionHead eyebrow="Dion" title={t("gallery")} text={t("galleryIntro")} />
-          <div className="mt-12 columns-2 gap-4 sm:columns-3 lg:columns-4 [column-fill:_balance]">
-            {GALLERY_IMAGES.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={`${t("gallery")} ${i + 1}`}
-                loading="lazy"
-                className={`mb-4 w-full break-inside-avoid object-cover transition-transform duration-500 hover:scale-[1.03] ${
-                  GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <Gallery />
     </main>
+  );
+}
+
+function Gallery() {
+  const { t } = useLang();
+  const [broken, setBroken] = useState<Record<string, true>>({});
+  const images = GALLERY_IMAGES.filter((src) => !broken[src]);
+
+  return (
+    <section id="galerija" className="section-pad bg-secondary/40 px-5">
+      <div className="mx-auto max-w-7xl">
+        <SectionHead eyebrow="Dion" title={t("gallery")} text={t("galleryIntro")} />
+        <div className="mt-12 columns-2 gap-4 sm:columns-3 lg:columns-4 [column-fill:_balance]">
+          {images.map((src, i) => (
+            <img
+              key={src}
+              ref={(node) => {
+                if (node && node.complete && node.naturalWidth === 0) {
+                  setBroken((prev) => ({ ...prev, [src]: true }));
+                }
+              }}
+              src={src}
+              alt={`${t("gallery")} ${i + 1}`}
+              onError={() => setBroken((prev) => ({ ...prev, [src]: true }))}
+              onLoad={(e) => {
+                if (e.currentTarget.naturalWidth === 0) {
+                  setBroken((prev) => ({ ...prev, [src]: true }));
+                }
+              }}
+              className={`mb-4 w-full break-inside-avoid object-cover transition-transform duration-500 hover:scale-[1.03] ${
+                GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

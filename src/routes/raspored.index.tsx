@@ -21,7 +21,7 @@ export const Route = createFileRoute("/raspored/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(scheduleQueryOptions),
+  loader: ({ context }) => context.queryClient.ensureQueryData(scheduleQueryOptions()),
   component: SchedulePage,
   errorComponent: ({ error }) => (
     <main className="px-5 pb-24 pt-32 text-center" role="alert">
@@ -32,8 +32,8 @@ export const Route = createFileRoute("/raspored/")({
 });
 
 function SchedulePage() {
-  const { t } = useLang();
-  const { data: events } = useSuspenseQuery(scheduleQueryOptions);
+  const { t, lang } = useLang();
+  const { data: events } = useSuspenseQuery(scheduleQueryOptions(lang));
 
   return (
     <main className="px-5 pb-24 pt-32">

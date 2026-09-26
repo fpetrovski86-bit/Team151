@@ -1,7 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const SCHEDULE_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv";
+type Lang = "mk" | "en";
+
+const SCHEDULE_URLS: Record<Lang, string> = {
+  mk: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv",
+  en: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1lTRELsob46JaY45wi8PXhIX12Mef-rnlEFMof2bSevH2__7PS5gDBQDk45R8co0QjDZEchepTYMi/pub?gid=0&single=true&output=csv",
+};
 
 export type ScheduleEvent = {
   id: string;
@@ -52,10 +56,11 @@ function formatTime(value: string): string {
   return raw;
 }
 
-export const getSchedule = createServerFn({ method: "GET" }).handler(
-  async (): Promise<ScheduleEvent[]> => {
+export const getSchedule = createServerFn({ method: "GET" })
+  .validator((lang: unknown): Lang => (lang === "en" ? "en" : "mk"))
+  .handler(async ({ data: lang }): Promise<ScheduleEvent[]> => {
     try {
-      const res = await fetch(SCHEDULE_URL, { headers: { accept: "text/csv" } });
+      const res = await fetch(SCHEDULE_URLS[lang], { headers: { accept: "text/csv" } });
       if (!res.ok) return [];
       const rows = parseCsv(await res.text());
       if (rows.length < 2) return [];

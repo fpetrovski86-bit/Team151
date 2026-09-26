@@ -20,7 +20,7 @@ export const Route = createFileRoute("/raspored/$id")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(scheduleQueryOptions),
+  loader: ({ context }) => context.queryClient.ensureQueryData(scheduleQueryOptions()),
   component: EventPage,
   errorComponent: ({ error }) => (
     <main className="px-5 pb-24 pt-32 text-center" role="alert">
@@ -32,8 +32,8 @@ export const Route = createFileRoute("/raspored/$id")({
 
 function EventPage() {
   const { id } = Route.useParams();
-  const { t } = useLang();
-  const { data: events } = useSuspenseQuery(scheduleQueryOptions);
+  const { t, lang } = useLang();
+  const { data: events } = useSuspenseQuery(scheduleQueryOptions(lang));
   const event = events.find((e) => e.id === id);
 
   if (!event) {
