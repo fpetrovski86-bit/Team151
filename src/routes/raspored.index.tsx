@@ -38,6 +38,9 @@ function SchedulePage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
+        <Link to="/" className="btn-base btn-quiet mb-8">
+          {t("back")}
+        </Link>
         <div className="text-center">
           <p className="eyebrow">Dion</p>
           <h1 className="mt-3 font-display text-4xl sm:text-5xl">{t("events")}</h1>

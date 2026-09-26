@@ -20,9 +20,10 @@ import dion17 from "@/assets/dion/dion-17.jpg.asset.json";
 import dion18 from "@/assets/dion/dion-18.jpg.asset.json";
 import dion19 from "@/assets/dion/dion-19.jpg.asset.json";
 
-const HERO_IMAGES = [dion1.url, dion2.url, dion3.url];
-// Третата слика гледа премногу во таванот — прикажи подолу дел од неа.
-const HERO_POSITIONS = ["", "", "object-[center_75%]"];
+// Првите три слики од новиот документ ротираат на позадината на почетната страна.
+const HERO_IMAGES = ["/dokument/doc-1.jpg", "/dokument/doc-2.jpg", "/dokument/doc-3.jpg"];
+// Втората слика фаќа многу од таванот — спушти го кадарот подолу.
+const HERO_POSITIONS = ["", "object-[center_80%]", ""];
 const GALLERY_ASPECTS = [
   "aspect-[3/4]",
   "aspect-square",
@@ -33,10 +34,13 @@ const GALLERY_ASPECTS = [
   "aspect-square",
   "aspect-[3/4]",
 ];
+// Останатите слики од документот подредени во галеријата, заедно со постоечките.
+const DOC_GALLERY = Array.from({ length: 15 }, (_, i) => `/dokument/doc-${i + 4}.jpg`);
 const GALLERY_IMAGES = [
-  dion4, dion5, dion6, dion7, dion8, dion9, dion10, dion11,
-  dion12, dion13, dion14, dion15, dion16, dion17, dion18, dion19,
-].map((a) => a.url);
+  ...DOC_GALLERY,
+  dion1, dion2, dion3, dion4, dion5, dion6, dion7, dion8, dion9, dion10,
+  dion11, dion12, dion13, dion14, dion15, dion16, dion17, dion18, dion19,
+].map((a) => (typeof a === "string" ? a : a.url));
 
 import { DishCard } from "@/components/site/DishCard";
 import { MENU } from "@/lib/menu-data";
