@@ -116,19 +116,9 @@ function Hero() {
           <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-base btn-outline-gold">
             {t("findUs")}
           </a>
-          <a
-            href="#specijaliteti"
-            className="btn-base btn-outline-gold"
-            onClick={(e) => {
-              const target = document.getElementById("specijaliteti");
-              if (!target) return;
-              e.preventDefault();
-              const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-              target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-            }}
-          >
-            {t("todaySpecials")}
-          </a>
+          <Link to="/raspored" className="btn-base btn-outline-gold">
+            {t("schedule")}
+          </Link>
           <Link to="/rezervacii" className="btn-base btn-outline-gold">
             {t("reservations")}
           </Link>

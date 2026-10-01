@@ -1,7 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const SCHEDULE_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv";
+const SCHEDULE_URLS = {
+  mk: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv",
+  en: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1lTRELsob46JaY45wi8PXhIX12Mef-rnlEFMof2bSevH2__7PS5gDBQDk45R8co0QjDZEchepTYMi/pub?gid=0&single=true&output=csv",
+} as const;
+
+export type ScheduleLang = keyof typeof SCHEDULE_URLS;
 
 export type ScheduleEvent = {
   id: string;
@@ -12,6 +16,8 @@ export type ScheduleEvent = {
   opis: string;
   slika: string;
 };
+
+export type ScheduleData = Record<ScheduleLang, ScheduleEvent[]>;
 
 function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
@@ -52,41 +58,46 @@ function formatTime(value: string): string {
   return raw;
 }
 
+async function fetchEvents(url: string): Promise<ScheduleEvent[]> {
+  try {
+    const res = await fetch(url, { headers: { accept: "text/csv" } });
+    if (!res.ok) return [];
+    const rows = parseCsv(await res.text());
+    if (rows.length < 2) return [];
+
+    const header = rows[0]!.map((h) => h.trim().toLowerCase());
+    const idx = (name: string) => header.indexOf(name);
+    const cols = {
+      naslov: idx("naslov"),
+      datum: idx("datum"),
+      vreme: idx("vreme"),
+      den: idx("den"),
+      opis: idx("opis"),
+      slika: idx("slika"),
+    };
+
+    const get = (row: string[], i: number) => (i >= 0 ? (row[i] ?? "").trim() : "");
+
+    return rows
+      .slice(1)
+      .map((row, index) => ({
+        id: String(index + 1),
+        naslov: get(row, cols.naslov),
+        datum: get(row, cols.datum),
+        vreme: formatTime(get(row, cols.vreme)),
+        den: get(row, cols.den),
+        opis: get(row, cols.opis),
+        slika: get(row, cols.slika),
+      }))
+      .filter((e) => e.naslov || e.datum);
+  } catch {
+    return [];
+  }
+}
+
 export const getSchedule = createServerFn({ method: "GET" }).handler(
-  async (): Promise<ScheduleEvent[]> => {
-    try {
-      const res = await fetch(SCHEDULE_URL, { headers: { accept: "text/csv" } });
-      if (!res.ok) return [];
-      const rows = parseCsv(await res.text());
-      if (rows.length < 2) return [];
-
-      const header = rows[0]!.map((h) => h.trim().toLowerCase());
-      const idx = (name: string) => header.indexOf(name);
-      const cols = {
-        naslov: idx("naslov"),
-        datum: idx("datum"),
-        vreme: idx("vreme"),
-        den: idx("den"),
-        opis: idx("opis"),
-        slika: idx("slika"),
-      };
-
-      const get = (row: string[], i: number) => (i >= 0 ? (row[i] ?? "").trim() : "");
-
-      return rows
-        .slice(1)
-        .map((row, index) => ({
-          id: String(index + 1),
-          naslov: get(row, cols.naslov),
-          datum: get(row, cols.datum),
-          vreme: formatTime(get(row, cols.vreme)),
-          den: get(row, cols.den),
-          opis: get(row, cols.opis),
-          slika: get(row, cols.slika),
-        }))
-        .filter((e) => e.naslov || e.datum);
-    } catch {
-      return [];
-    }
-  },
+  async (): Promise<ScheduleData> => ({
+    mk: await fetchEvents(SCHEDULE_URLS.mk),
+    en: await fetchEvents(SCHEDULE_URLS.en),
+  }),
 );

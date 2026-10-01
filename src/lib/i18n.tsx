@@ -63,6 +63,7 @@ const dict = {
     orderNow: "Нарачај сега",
     eventDetails: "Детали за настанот",
     eventIntro: "Повеќе информации за овој настан во Дион Центар.",
+    backToHome: "Кон почетната",
   },
   en: {
     brand: "Dion Centar",
@@ -124,6 +125,7 @@ const dict = {
     orderNow: "Order now",
     eventDetails: "Event details",
     eventIntro: "More information about this event at Dion Centar.",
+    backToHome: "Back to home",
   },
 } as const;
 

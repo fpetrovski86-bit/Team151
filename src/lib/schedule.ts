@@ -7,4 +7,4 @@ export const scheduleQueryOptions = queryOptions({
   staleTime: 60_000,
 });
 
-export type { ScheduleEvent } from "./schedule.functions";
+export type { ScheduleEvent, ScheduleData } from "./schedule.functions";
