@@ -58,41 +58,46 @@ function formatTime(value: string): string {
   return raw;
 }
 
+async function fetchEvents(url: string): Promise<ScheduleEvent[]> {
+  try {
+    const res = await fetch(url, { headers: { accept: "text/csv" } });
+    if (!res.ok) return [];
+    const rows = parseCsv(await res.text());
+    if (rows.length < 2) return [];
+
+    const header = rows[0]!.map((h) => h.trim().toLowerCase());
+    const idx = (name: string) => header.indexOf(name);
+    const cols = {
+      naslov: idx("naslov"),
+      datum: idx("datum"),
+      vreme: idx("vreme"),
+      den: idx("den"),
+      opis: idx("opis"),
+      slika: idx("slika"),
+    };
+
+    const get = (row: string[], i: number) => (i >= 0 ? (row[i] ?? "").trim() : "");
+
+    return rows
+      .slice(1)
+      .map((row, index) => ({
+        id: String(index + 1),
+        naslov: get(row, cols.naslov),
+        datum: get(row, cols.datum),
+        vreme: formatTime(get(row, cols.vreme)),
+        den: get(row, cols.den),
+        opis: get(row, cols.opis),
+        slika: get(row, cols.slika),
+      }))
+      .filter((e) => e.naslov || e.datum);
+  } catch {
+    return [];
+  }
+}
+
 export const getSchedule = createServerFn({ method: "GET" }).handler(
-  async (): Promise<ScheduleEvent[]> => {
-    try {
-      const res = await fetch(SCHEDULE_URL, { headers: { accept: "text/csv" } });
-      if (!res.ok) return [];
-      const rows = parseCsv(await res.text());
-      if (rows.length < 2) return [];
-
-      const header = rows[0]!.map((h) => h.trim().toLowerCase());
-      const idx = (name: string) => header.indexOf(name);
-      const cols = {
-        naslov: idx("naslov"),
-        datum: idx("datum"),
-        vreme: idx("vreme"),
-        den: idx("den"),
-        opis: idx("opis"),
-        slika: idx("slika"),
-      };
-
-      const get = (row: string[], i: number) => (i >= 0 ? (row[i] ?? "").trim() : "");
-
-      return rows
-        .slice(1)
-        .map((row, index) => ({
-          id: String(index + 1),
-          naslov: get(row, cols.naslov),
-          datum: get(row, cols.datum),
-          vreme: formatTime(get(row, cols.vreme)),
-          den: get(row, cols.den),
-          opis: get(row, cols.opis),
-          slika: get(row, cols.slika),
-        }))
-        .filter((e) => e.naslov || e.datum);
-    } catch {
-      return [];
-    }
-  },
+  async (): Promise<ScheduleData> => ({
+    mk: await fetchEvents(SCHEDULE_URLS.mk),
+    en: await fetchEvents(SCHEDULE_URLS.en),
+  }),
 );
