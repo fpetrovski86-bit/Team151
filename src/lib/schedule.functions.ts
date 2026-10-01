@@ -1,7 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const SCHEDULE_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv";
+const SCHEDULE_URLS = {
+  mk: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHMb0JTC1l-VTfMzF98rxumrAbqpdPkG6qpU2ZfUjd-gXVWGG6cF39edntGl_xUrLVIEyYy2ky-bKu/pub?gid=0&single=true&output=csv",
+  en: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1lTRELsob46JaY45wi8PXhIX12Mef-rnlEFMof2bSevH2__7PS5gDBQDk45R8co0QjDZEchepTYMi/pub?gid=0&single=true&output=csv",
+} as const;
+
+export type ScheduleLang = keyof typeof SCHEDULE_URLS;
 
 export type ScheduleEvent = {
   id: string;
@@ -12,6 +16,8 @@ export type ScheduleEvent = {
   opis: string;
   slika: string;
 };
+
+export type ScheduleData = Record<ScheduleLang, ScheduleEvent[]>;
 
 function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
