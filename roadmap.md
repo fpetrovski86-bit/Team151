@@ -1,6 +1,6 @@
 # Roadmap
 
-## Open
-- Events page back-to-home button (in progress)
-- English events from new CSV URL (in progress)
-- Home: replace "Specijaliteti" button with "Nastani" (in progress)"
+## Done
+- Events page back-to-home button
+- English events from new CSV URL
+- Home: "Nastani" button instead of "Specijaliteti"
