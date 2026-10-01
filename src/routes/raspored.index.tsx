@@ -39,17 +39,16 @@ function SchedulePage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
+        <div className="mb-8 flex justify-end">
+          <Link to="/" className="btn-base btn-quiet">
+            {t("back")}
+          </Link>
+        </div>
         <div className="text-center">
           <p className="eyebrow">Dion</p>
           <h1 className="mt-3 font-display text-4xl sm:text-5xl">{t("events")}</h1>
           <div className="diamond-rule mt-5" />
           <p className="mt-5 text-muted-foreground">{t("eventsIntro")}</p>
-        </div>
-
-        <div className="mt-8 text-center">
-          <Link to="/" className="btn-base btn-outline-brand px-8 py-3">
-            ← {t("backToHome")}
-          </Link>
         </div>
 
         {events.length === 0 ? (
