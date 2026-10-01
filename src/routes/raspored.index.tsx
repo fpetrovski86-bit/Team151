@@ -25,7 +25,7 @@ export const Route = createFileRoute("/raspored/")({
   component: SchedulePage,
   errorComponent: ({ error }) => (
     <main className="px-5 pb-24 pt-32 text-center" role="alert">
-      {error.message}
+      {(error as Error).message}
     </main>
   ),
   notFoundComponent: () => <main className="px-5 pb-24 pt-32 text-center">—</main>,

@@ -1,26 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import dion1 from "@/assets/dion/dion-1.jpg.asset.json";
-import dion2 from "@/assets/dion/dion-2.jpg.asset.json";
-import dion3 from "@/assets/dion/dion-3.jpg.asset.json";
-import dion4 from "@/assets/dion/dion-4.jpg.asset.json";
-import dion5 from "@/assets/dion/dion-5.jpg.asset.json";
-import dion6 from "@/assets/dion/dion-6.jpg.asset.json";
-import dion7 from "@/assets/dion/dion-7.jpg.asset.json";
-import dion8 from "@/assets/dion/dion-8.jpg.asset.json";
-import dion9 from "@/assets/dion/dion-9.jpg.asset.json";
-import dion10 from "@/assets/dion/dion-10.jpg.asset.json";
-import dion11 from "@/assets/dion/dion-11.jpg.asset.json";
-import dion12 from "@/assets/dion/dion-12.jpg.asset.json";
-import dion13 from "@/assets/dion/dion-13.jpg.asset.json";
-import dion14 from "@/assets/dion/dion-14.jpg.asset.json";
-import dion15 from "@/assets/dion/dion-15.jpg.asset.json";
-import dion16 from "@/assets/dion/dion-16.jpg.asset.json";
-import dion17 from "@/assets/dion/dion-17.jpg.asset.json";
-import dion18 from "@/assets/dion/dion-18.jpg.asset.json";
-import dion19 from "@/assets/dion/dion-19.jpg.asset.json";
+import dion1 from "@/assets/dion/dion-1.jpg";
+import dion2 from "@/assets/dion/dion-2.jpg";
+import dion3 from "@/assets/dion/dion-3.jpg";
+import dion4 from "@/assets/dion/dion-4.jpg";
+import dion5 from "@/assets/dion/dion-5.jpg";
+import dion6 from "@/assets/dion/dion-6.jpg";
+import dion7 from "@/assets/dion/dion-7.jpg";
+import dion8 from "@/assets/dion/dion-8.jpg";
+import dion9 from "@/assets/dion/dion-9.jpg";
+import dion10 from "@/assets/dion/dion-10.jpg";
+import dion11 from "@/assets/dion/dion-11.jpg";
+import dion12 from "@/assets/dion/dion-12.jpg";
+import dion13 from "@/assets/dion/dion-13.jpg";
+import dion14 from "@/assets/dion/dion-14.jpg";
+import dion15 from "@/assets/dion/dion-15.jpg";
+import dion16 from "@/assets/dion/dion-16.jpg";
+import dion17 from "@/assets/dion/dion-17.jpg";
+import dion18 from "@/assets/dion/dion-18.jpg";
+import dion19 from "@/assets/dion/dion-19.jpg";
 
-const HERO_IMAGES = [dion1.url, dion2.url, dion3.url];
+const HERO_IMAGES = [dion1, dion2, dion3];
 // Третата слика гледа премногу во таванот — прикажи подолу дел од неа.
 const HERO_POSITIONS = ["", "", "object-[center_75%]"];
 const GALLERY_ASPECTS = [
@@ -36,7 +36,7 @@ const GALLERY_ASPECTS = [
 const GALLERY_IMAGES = [
   dion4, dion5, dion6, dion7, dion8, dion9, dion10, dion11,
   dion12, dion13, dion14, dion15, dion16, dion17, dion18, dion19,
-].map((a) => a.url);
+];
 
 import { DishCard } from "@/components/site/DishCard";
 import { MENU } from "@/lib/menu-data";
