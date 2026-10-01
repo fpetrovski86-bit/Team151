@@ -36,7 +36,7 @@ const GALLERY_ASPECTS = [
 const GALLERY_IMAGES = [
   dion4, dion5, dion6, dion7, dion8, dion9, dion10, dion11,
   dion12, dion13, dion14, dion15, dion16, dion17, dion18, dion19,
-].map((a) => a.url);
+];
 
 import { DishCard } from "@/components/site/DishCard";
 import { MENU } from "@/lib/menu-data";
