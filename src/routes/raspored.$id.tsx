@@ -32,8 +32,9 @@ export const Route = createFileRoute("/raspored/$id")({
 
 function EventPage() {
   const { id } = Route.useParams();
-  const { t } = useLang();
-  const { data: events } = useSuspenseQuery(scheduleQueryOptions);
+  const { t, lang } = useLang();
+  const { data: schedule } = useSuspenseQuery(scheduleQueryOptions);
+  const events = schedule[lang] ?? [];
   const event = events.find((e) => e.id === id);
 
   if (!event) {
@@ -49,9 +50,14 @@ function EventPage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-3xl">
-        <Link to="/raspored" className="btn-base btn-quiet">
-          ← {t("back")}
-        </Link>
+        <div className="flex items-center justify-between gap-3">
+          <Link to="/raspored" className="btn-base btn-quiet">
+            ← {t("back")}
+          </Link>
+          <Link to="/" className="btn-base btn-outline-brand px-6 py-2.5 text-sm">
+            {t("backToHome")}
+          </Link>
+        </div>
 
         <div className="mt-10 text-center">
           <p className="eyebrow">{t("events")}</p>
