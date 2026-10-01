@@ -32,8 +32,9 @@ export const Route = createFileRoute("/raspored/")({
 });
 
 function SchedulePage() {
-  const { t } = useLang();
-  const { data: events } = useSuspenseQuery(scheduleQueryOptions);
+  const { t, lang } = useLang();
+  const { data: schedule } = useSuspenseQuery(scheduleQueryOptions);
+  const events = schedule[lang] ?? [];
 
   return (
     <main className="px-5 pb-24 pt-32">
@@ -43,6 +44,12 @@ function SchedulePage() {
           <h1 className="mt-3 font-display text-4xl sm:text-5xl">{t("events")}</h1>
           <div className="diamond-rule mt-5" />
           <p className="mt-5 text-muted-foreground">{t("eventsIntro")}</p>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link to="/" className="btn-base btn-outline-brand px-8 py-3">
+            ← {t("backToHome")}
+          </Link>
         </div>
 
         {events.length === 0 ? (
