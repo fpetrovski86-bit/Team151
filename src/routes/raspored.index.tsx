@@ -39,7 +39,7 @@ function SchedulePage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-8 flex justify-end">
+        <div className="mb-8 flex justify-start">
           <Link to="/" className="btn-base btn-quiet">
             {t("back")}
           </Link>
