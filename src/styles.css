@@ -109,6 +109,9 @@
 
 @utility page-transition-content {
   view-transition-name: page-content;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  isolation: isolate;
 }
 
 ::view-transition-old(root),
