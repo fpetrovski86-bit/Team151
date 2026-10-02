@@ -32,7 +32,7 @@ function CategoryPage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-7xl">
-        <Link to="/meni" className="btn-base btn-quiet">
+        <Link to="/meni" data-transition-direction="back" className="btn-base btn-quiet">
           ← {t("back")}
         </Link>
 
@@ -51,7 +51,7 @@ function CategoryPage() {
         </div>
 
         <div className="mt-14 text-center">
-          <Link to="/meni" className="btn-base btn-solid">
+          <Link to="/meni" data-transition-direction="back" className="btn-base btn-solid">
             ← {t("back")}
           </Link>
         </div>

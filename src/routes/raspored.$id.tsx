@@ -40,7 +40,7 @@ function EventPage() {
   if (!event) {
     return (
       <main className="px-5 pb-24 pt-32 text-center">
-        <Link to="/raspored" className="btn-base btn-quiet">
+        <Link to="/raspored" data-transition-direction="back" className="btn-base btn-quiet">
           ← {t("back")}
         </Link>
       </main>
@@ -51,10 +51,10 @@ function EventPage() {
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center justify-between gap-3">
-          <Link to="/raspored" className="btn-base btn-quiet">
+          <Link to="/raspored" data-transition-direction="back" className="btn-base btn-quiet">
             ← {t("back")}
           </Link>
-          <Link to="/" className="btn-base btn-outline-brand px-6 py-2.5 text-sm">
+          <Link to="/" data-transition-direction="back" className="btn-base btn-outline-brand px-6 py-2.5 text-sm">
             {t("backToHome")}
           </Link>
         </div>

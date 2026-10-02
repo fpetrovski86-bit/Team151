@@ -8,7 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -142,15 +142,25 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
+  const setTransitionDirection = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest("a");
+    if (!link || !link.hasAttribute("href")) return;
+    document.documentElement.dataset["transitionDirection"] =
+      link.dataset["transitionDirection"] === "back" ? "back" : "forward";
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
-        <TopBar />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <div key={pathname} className="page-enter">
-          <Outlet />
+        <div onClickCapture={setTransitionDirection}>
+          <TopBar />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <div key={pathname} className="page-transition-content">
+            <Outlet />
+          </div>
+          <SiteFooter />
         </div>
-        <SiteFooter />
       </LanguageProvider>
     </QueryClientProvider>
   );
