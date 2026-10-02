@@ -80,7 +80,7 @@ function OrdersPage() {
   return (
     <main className="section-pad px-5 pt-32">
       <div className="mx-auto max-w-3xl">
-        <Link to="/" className="btn-base btn-quiet mb-8">
+        <Link to="/" data-transition-direction="back" className="btn-base btn-quiet mb-8">
           {t("back")}
         </Link>
         <div className="text-center">
