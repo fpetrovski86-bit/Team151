@@ -61,7 +61,6 @@ export function SiteFooter() {
       <div className="border-t border-gold/15">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs opacity-70 sm:flex-row">
           <span>© {new Date().getFullYear()} {t("brand")}. {t("rights")}</span>
-          <span>{t("hours")}</span>
         </div>
       </div>
     </footer>
