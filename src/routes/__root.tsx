@@ -146,8 +146,8 @@ function RootComponent() {
     if (!(event.target instanceof Element)) return;
     const link = event.target.closest("a");
     if (!link || !link.hasAttribute("href")) return;
-    document.documentElement.dataset.transitionDirection =
-      link.dataset.transitionDirection === "back" ? "back" : "forward";
+    document.documentElement.dataset["transitionDirection"] =
+      link.dataset["transitionDirection"] === "back" ? "back" : "forward";
   };
 
   return (
