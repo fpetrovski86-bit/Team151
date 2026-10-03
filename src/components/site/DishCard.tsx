@@ -29,7 +29,7 @@ export function DishCard({ item }: { item?: MenuItem }) {
 
   const hidePopup = () => {
     setVisible(false);
-    window.setTimeout(() => setOpen(false), 300);
+    window.setTimeout(() => setOpen(false), 500);
   };
 
   return (
