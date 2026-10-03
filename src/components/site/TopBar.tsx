@@ -95,7 +95,7 @@ export function TopBar() {
   }`;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background shadow-[var(--shadow-warm)]">
+    <header className="site-header-transition fixed inset-x-0 top-0 z-40 border-b border-border bg-background shadow-[var(--shadow-warm)]">
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:gap-5 sm:px-5">
         <div className="flex min-w-0 items-center gap-8">
           <Link
