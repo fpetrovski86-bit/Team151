@@ -114,6 +114,10 @@
   isolation: isolate;
 }
 
+@utility site-header-transition {
+  view-transition-name: site-header;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -122,6 +126,17 @@
 ::view-transition-group(page-content) {
   animation-duration: 680ms;
   animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+::view-transition-group(site-header) {
+  z-index: 100;
+  animation: none;
+}
+
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 :root:not([data-transition-direction="back"])::view-transition-old(page-content) {
