@@ -56,14 +56,12 @@ export function DishCard({ item }: { item?: MenuItem }) {
 
       {open && (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 transition-opacity duration-300 ease-out motion-reduce:transition-none ${
-            visible ? "opacity-100" : "opacity-0"
-          }`}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4"
           onClick={hidePopup}
         >
           <div
-            className={`card-warm w-full max-w-md transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none p-6 ${
-              visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-3 scale-95 opacity-0"
+            className={`card-warm w-full max-w-md p-6 transition-transform duration-500 ease-out motion-reduce:transition-none ${
+              visible ? "translate-y-0" : "-translate-y-[100vh]"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
