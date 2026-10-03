@@ -46,7 +46,9 @@ function Dropdown({
           wide
             ? "inset-x-0 top-full z-50 overflow-hidden"
             : "left-0 top-full z-50 mt-4 w-72 overflow-hidden"
-        } ${open ? "visible" : "invisible"}`}
+        } transition-[visibility] duration-300 ${
+          open ? "visible" : "invisible"
+        }`}
       >
         <div
           className={`transition-transform duration-300 ease-out motion-reduce:transition-none ${
