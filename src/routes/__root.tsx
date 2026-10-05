@@ -148,6 +148,14 @@ function RootComponent() {
     if (!link || !link.hasAttribute("href")) return;
     document.documentElement.dataset["transitionDirection"] =
       link.dataset["transitionDirection"] === "back" ? "back" : "forward";
+    const url = new URL(link.href, window.location.href);
+    if (
+      url.origin === window.location.origin &&
+      url.pathname !== window.location.pathname &&
+      link.target !== "_blank"
+    ) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    }
   };
 
   return (
