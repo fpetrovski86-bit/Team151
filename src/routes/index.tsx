@@ -39,6 +39,7 @@ const GALLERY_IMAGES = [
 ];
 
 import { DishCard } from "@/components/site/DishCard";
+import { Reveal } from "@/components/site/Reveal";
 import { MENU } from "@/lib/menu-data";
 import { useLang } from "@/lib/i18n";
 
