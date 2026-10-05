@@ -132,12 +132,14 @@ function Hero() {
 
 function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
-    <div className="mx-auto max-w-2xl text-center">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-3 font-display text-4xl sm:text-5xl">{title}</h2>
-      <div className="diamond-rule mt-4" aria-hidden />
-      {text && <p className="mt-4 text-muted-foreground">{text}</p>}
-    </div>
+    <Reveal direction="up">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="mt-3 font-display text-4xl sm:text-5xl">{title}</h2>
+        <div className="diamond-rule mt-4" aria-hidden />
+        {text && <p className="mt-4 text-muted-foreground">{text}</p>}
+      </div>
+    </Reveal>
   );
 }
 
@@ -159,15 +161,19 @@ function Home() {
             title={t("todaySpecials")}
           />
           <div className="mt-12 grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-            {SPECIALS.map((item) => (
-              <DishCard key={item!.name} item={item!} />
+            {SPECIALS.map((item, i) => (
+              <Reveal key={item!.name} direction="up" delay={i * 120}>
+                <DishCard item={item!} />
+              </Reveal>
             ))}
           </div>
-          <div className="mt-14 text-center">
-            <Link to="/meni" className="btn-base btn-outline-brand px-14 py-4 text-lg">
-              {t("menuBtn")}
-            </Link>
-          </div>
+          <Reveal direction="up" delay={200}>
+            <div className="mt-14 text-center">
+              <Link to="/meni" className="btn-base btn-outline-brand px-14 py-4 text-lg">
+                {t("menuBtn")}
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
