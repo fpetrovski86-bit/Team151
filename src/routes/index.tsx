@@ -39,6 +39,7 @@ const GALLERY_IMAGES = [
 ];
 
 import { DishCard } from "@/components/site/DishCard";
+import { Reveal } from "@/components/site/Reveal";
 import { MENU } from "@/lib/menu-data";
 import { useLang } from "@/lib/i18n";
 
@@ -131,12 +132,14 @@ function Hero() {
 
 function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
-    <div className="mx-auto max-w-2xl text-center">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-3 font-display text-4xl sm:text-5xl">{title}</h2>
-      <div className="diamond-rule mt-4" aria-hidden />
-      {text && <p className="mt-4 text-muted-foreground">{text}</p>}
-    </div>
+    <Reveal direction="up">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="mt-3 font-display text-4xl sm:text-5xl">{title}</h2>
+        <div className="diamond-rule mt-4" aria-hidden />
+        {text && <p className="mt-4 text-muted-foreground">{text}</p>}
+      </div>
+    </Reveal>
   );
 }
 
@@ -158,15 +161,19 @@ function Home() {
             title={t("todaySpecials")}
           />
           <div className="mt-12 grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-            {SPECIALS.map((item) => (
-              <DishCard key={item!.name} item={item!} />
+            {SPECIALS.map((item, i) => (
+              <Reveal key={item!.name} direction="up" delay={i * 120}>
+                <DishCard item={item!} />
+              </Reveal>
             ))}
           </div>
-          <div className="mt-14 text-center">
-            <Link to="/meni" className="btn-base btn-outline-brand px-14 py-4 text-lg">
-              {t("menuBtn")}
-            </Link>
-          </div>
+          <Reveal direction="up" delay={200}>
+            <div className="mt-14 text-center">
+              <Link to="/meni" className="btn-base btn-outline-brand px-14 py-4 text-lg">
+                {t("menuBtn")}
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -179,15 +186,21 @@ function Home() {
           <SectionHead eyebrow="Dion" title={t("gallery")} text={t("galleryIntro")} />
           <div className="mt-12 columns-2 gap-4 sm:columns-3 lg:columns-4 [column-fill:_balance]">
             {GALLERY_IMAGES.map((src, i) => (
-              <img
+              <Reveal
                 key={src}
-                src={src}
-                alt={`${t("gallery")} ${i + 1}`}
-                loading="lazy"
-                className={`mb-4 w-full break-inside-avoid object-cover transition-transform duration-500 hover:scale-[1.03] ${
-                  GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
-                }`}
-              />
+                direction="up"
+                delay={(i % 4) * 110}
+                className="mb-4 break-inside-avoid"
+              >
+                <img
+                  src={src}
+                  alt={`${t("gallery")} ${i + 1}`}
+                  loading="lazy"
+                  className={`w-full object-cover transition-transform duration-500 hover:scale-[1.03] ${
+                    GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
+                  }`}
+                />
+              </Reveal>
             ))}
           </div>
         </div>

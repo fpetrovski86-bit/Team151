@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
 import terraceAsset from "@/assets/about/about-terrace.jpg.asset.json";
 import cuisineAsset from "@/assets/about/about-cuisine.jpg.asset.json";
 import coffeeAsset from "@/assets/about/about-coffee.jpg.asset.json";
+import { Reveal } from "@/components/site/Reveal";
 import { useLang } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/za-nas")({
   head: () => ({
@@ -26,56 +27,6 @@ export const Route = createFileRoute("/za-nas")({
   }),
   component: AboutPage,
 });
-
-function Reveal({
-  children,
-  direction,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  direction: "left" | "right" | "up";
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setShown(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.18, rootMargin: "0px 0px -60px 0px" },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const hidden =
-    direction === "left"
-      ? "-translate-x-24"
-      : direction === "right"
-        ? "translate-x-24"
-        : "translate-y-16";
-
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-[opacity,transform] duration-[900ms] ease-out motion-reduce:transition-none ${
-        shown ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${hidden}`
-      } ${className ?? ""}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 function FeatureRow({
   image,
