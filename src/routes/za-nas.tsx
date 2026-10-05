@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
 import terraceAsset from "@/assets/about/about-terrace.jpg.asset.json";
 import cuisineAsset from "@/assets/about/about-cuisine.jpg.asset.json";
 import coffeeAsset from "@/assets/about/about-coffee.jpg.asset.json";
+import { Reveal } from "@/components/site/Reveal";
 import { useLang } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/za-nas")({
   head: () => ({
