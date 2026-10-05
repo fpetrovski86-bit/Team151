@@ -64,6 +64,20 @@ const dict = {
     eventDetails: "Детали за настанот",
     eventIntro: "Повеќе информации за овој настан во Дион Центар.",
     backToHome: "Кон почетната",
+    aboutNav: "За нас",
+    aboutTitle: "За нас",
+    aboutLead: "Добредојдовте во срцето на Скопје",
+    aboutLeadText:
+      "Од нашето отворање па сè до денес, мисијата ни е едноставна: да создадеме простор каде секој гостин ќе се чувствува како дома, но со допир на луксуз и врвна услуга. Со години го градиме нашето име преку посветеност на квалитетот, внимателно одбрани состојки и страст кон кулинарската уметност.",
+    aboutS1Title: "Тераса покрај реката",
+    aboutS1Text:
+      "Нашата тераса на Кеј 13-ти Ноември ви овозможува да уживате во преубави речни пејзажи, во непосредна близина на главните градски обележја.",
+    aboutS2Title: "Традиција и современ вкус",
+    aboutS2Text:
+      "Спојуваме традиционални македонски рецепти со модерни меѓународни специјалитети, подготвени од врвни мајстори на кујната.",
+    aboutS3Title: "Атмосфера за секоја прилика",
+    aboutS3Text:
+      "Без разлика дали доаѓате на утринско кафе, деловен ручек, романтична вечера или вечерно дружење со пијалок, нашиот модерен и топол ентериер нуди совршена атмосфера за секоја прилика.",
   },
   en: {
     brand: "Dion Centar",
@@ -126,6 +140,20 @@ const dict = {
     eventDetails: "Event details",
     eventIntro: "More information about this event at Dion Centar.",
     backToHome: "Back to home",
+    aboutNav: "About us",
+    aboutTitle: "About us",
+    aboutLead: "Welcome to the heart of Skopje",
+    aboutLeadText:
+      "Since the day we first opened our doors, our mission has been simple: to create a space where every guest feels at home, with a touch of luxury and first-class service. Over the years we have built our name through dedication to quality, carefully selected ingredients and a passion for the culinary arts.",
+    aboutS1Title: "A terrace by the river",
+    aboutS1Text:
+      "Our terrace on Kej 13-ti Noemvri lets you enjoy beautiful river views, right next to the city's main landmarks.",
+    aboutS2Title: "Tradition meets modern taste",
+    aboutS2Text:
+      "We blend traditional Macedonian recipes with modern international specialties, prepared by master chefs at the top of their craft.",
+    aboutS3Title: "An atmosphere for every occasion",
+    aboutS3Text:
+      "Whether you join us for morning coffee, a business lunch, a romantic dinner or an evening get-together with a drink, our modern and warm interior offers the perfect setting for every occasion.",
   },
 } as const;
 
