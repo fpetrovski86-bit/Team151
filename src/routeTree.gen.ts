@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as MeniRouteImport } from './routes/meni'
 import { Route as NarackiRouteImport } from './routes/naracki'
 import { Route as RezervaciiRouteImport } from './routes/rezervacii'
+import { Route as ZaNasRouteImport } from './routes/za-nas'
 import { Route as KategorijaIdRouteImport } from './routes/kategorija.$id'
 import { Route as RasporedIndexRouteImport } from './routes/raspored.index'
 import { Route as RasporedIdRouteImport } from './routes/raspored.$id'
@@ -37,6 +38,11 @@ const RezervaciiRoute = RezervaciiRouteImport.update({
   path: '/rezervacii',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZaNasRoute = ZaNasRouteImport.update({
+  id: '/za-nas',
+  path: '/za-nas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KategorijaIdRoute = KategorijaIdRouteImport.update({
   id: '/kategorija/$id',
   path: '/kategorija/$id',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/meni': typeof MeniRoute
   '/naracki': typeof NarackiRoute
   '/rezervacii': typeof RezervaciiRoute
+  '/za-nas': typeof ZaNasRoute
   '/kategorija/$id': typeof KategorijaIdRoute
   '/raspored/$id': typeof RasporedIdRoute
   '/raspored/': typeof RasporedIndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/meni': typeof MeniRoute
   '/naracki': typeof NarackiRoute
   '/rezervacii': typeof RezervaciiRoute
+  '/za-nas': typeof ZaNasRoute
   '/kategorija/$id': typeof KategorijaIdRoute
   '/raspored/$id': typeof RasporedIdRoute
   '/raspored': typeof RasporedIndexRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/meni': typeof MeniRoute
   '/naracki': typeof NarackiRoute
   '/rezervacii': typeof RezervaciiRoute
+  '/za-nas': typeof ZaNasRoute
   '/kategorija/$id': typeof KategorijaIdRoute
   '/raspored/$id': typeof RasporedIdRoute
   '/raspored/': typeof RasporedIndexRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/meni'
     | '/naracki'
     | '/rezervacii'
+    | '/za-nas'
     | '/kategorija/$id'
     | '/raspored/$id'
     | '/raspored/'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/meni'
     | '/naracki'
     | '/rezervacii'
+    | '/za-nas'
     | '/kategorija/$id'
     | '/raspored/$id'
     | '/raspored'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/meni'
     | '/naracki'
     | '/rezervacii'
+    | '/za-nas'
     | '/kategorija/$id'
     | '/raspored/$id'
     | '/raspored/'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   MeniRoute: typeof MeniRoute
   NarackiRoute: typeof NarackiRoute
   RezervaciiRoute: typeof RezervaciiRoute
+  ZaNasRoute: typeof ZaNasRoute
   KategorijaIdRoute: typeof KategorijaIdRoute
   RasporedIdRoute: typeof RasporedIdRoute
   RasporedIndexRoute: typeof RasporedIndexRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RezervaciiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/za-nas': {
+      id: '/za-nas'
+      path: '/za-nas'
+      fullPath: '/za-nas'
+      preLoaderRoute: typeof ZaNasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kategorija/$id': {
       id: '/kategorija/$id'
       path: '/kategorija/$id'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   MeniRoute: MeniRoute,
   NarackiRoute: NarackiRoute,
   RezervaciiRoute: RezervaciiRoute,
+  ZaNasRoute: ZaNasRoute,
   KategorijaIdRoute: KategorijaIdRoute,
   RasporedIdRoute: RasporedIdRoute,
   RasporedIndexRoute: RasporedIndexRoute,

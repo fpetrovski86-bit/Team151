@@ -146,6 +146,10 @@ export function TopBar() {
                )}
             </Dropdown>
 
+            <Link to="/za-nas" className={linkCls}>
+              {t("aboutNav")}
+            </Link>
+
             <Link to="/raspored" className={linkCls}>
               {t("schedule")}
             </Link>
