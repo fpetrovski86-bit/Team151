@@ -186,15 +186,21 @@ function Home() {
           <SectionHead eyebrow="Dion" title={t("gallery")} text={t("galleryIntro")} />
           <div className="mt-12 columns-2 gap-4 sm:columns-3 lg:columns-4 [column-fill:_balance]">
             {GALLERY_IMAGES.map((src, i) => (
-              <img
+              <Reveal
                 key={src}
-                src={src}
-                alt={`${t("gallery")} ${i + 1}`}
-                loading="lazy"
-                className={`mb-4 w-full break-inside-avoid object-cover transition-transform duration-500 hover:scale-[1.03] ${
-                  GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
-                }`}
-              />
+                direction="up"
+                delay={(i % 4) * 110}
+                className="mb-4 break-inside-avoid"
+              >
+                <img
+                  src={src}
+                  alt={`${t("gallery")} ${i + 1}`}
+                  loading="lazy"
+                  className={`w-full object-cover transition-transform duration-500 hover:scale-[1.03] ${
+                    GALLERY_ASPECTS[i % GALLERY_ASPECTS.length]
+                  }`}
+                />
+              </Reveal>
             ))}
           </div>
         </div>
