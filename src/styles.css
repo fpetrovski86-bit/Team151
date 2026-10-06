@@ -139,6 +139,12 @@
   mix-blend-mode: normal;
 }
 
+/* The frozen old header snapshot would keep a stale copy of an open dropdown. */
+::view-transition-old(site-header) {
+  display: none;
+}
+
+
 :root:not([data-transition-direction="back"])::view-transition-old(page-content) {
   z-index: 1;
   animation: none;
