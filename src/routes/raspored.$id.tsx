@@ -50,14 +50,9 @@ function EventPage() {
   return (
     <main className="px-5 pb-24 pt-32">
       <div className="mx-auto max-w-3xl">
-        <div className="flex items-center justify-between gap-3">
-          <Link to="/raspored" data-transition-direction="back" className="btn-base btn-quiet">
-            ← {t("back")}
-          </Link>
-          <Link to="/" data-transition-direction="back" className="btn-base btn-outline-brand px-6 py-2.5 text-sm">
-            {t("backToHome")}
-          </Link>
-        </div>
+        <Link to="/raspored" data-transition-direction="back" className="btn-base btn-quiet">
+          ← {t("back")}
+        </Link>
 
         <div className="mt-10 text-center">
           <p className="eyebrow">{t("events")}</p>
