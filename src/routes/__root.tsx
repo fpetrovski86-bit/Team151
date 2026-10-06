@@ -154,7 +154,7 @@ function RootComponent() {
       url.pathname !== window.location.pathname &&
       link.target !== "_blank"
     ) {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" as ScrollBehavior });
     }
   };
 
