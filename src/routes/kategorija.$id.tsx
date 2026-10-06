@@ -49,12 +49,6 @@ function CategoryPage() {
             <DishCard key={item.name} item={item} />
           ))}
         </div>
-
-        <div className="mt-14 text-center">
-          <Link to="/meni" data-transition-direction="back" className="btn-base btn-solid">
-            ← {t("back")}
-          </Link>
-        </div>
       </div>
     </main>
   );
