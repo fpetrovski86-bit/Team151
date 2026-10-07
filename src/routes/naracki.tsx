@@ -105,7 +105,7 @@ function OrdersPage() {
             <label className="block text-sm">
               <span className="text-muted-foreground">{t("chooseCategory")}</span>
               <select
-                value={catId}
+                value={category?.id ?? ""}
                 onChange={(e) => setCatId(e.target.value)}
                 className="mt-1 w-full border border-input bg-background p-3 font-display uppercase"
               >
