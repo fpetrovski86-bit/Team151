@@ -37,7 +37,7 @@ export function SiteFooter() {
               +389 2 310 1030
             </a>
           </p>
-          <p className="mt-2 text-sm opacity-80">Кеј 13-ти Ноември, 1000 Скопје</p>
+          <p className="mt-2 text-sm opacity-80">{t("addressLine")}</p>
         </div>
 
         <div>
