@@ -120,8 +120,8 @@ function Hero() {
           <Link to="/raspored" className="btn-base btn-outline-gold">
             {t("schedule")}
           </Link>
-          <Link to="/rezervacii" className="btn-base btn-outline-gold">
-            {t("reservations")}
+          <Link to="/za-nas" className="btn-base btn-outline-gold">
+            {t("aboutNav")}
           </Link>
         </div>
 

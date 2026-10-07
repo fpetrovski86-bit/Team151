@@ -20,11 +20,40 @@ export const Route = createFileRoute("/rezervacii")({
   component: ReservationsPage,
 });
 
-function Field({ label, type, name }: { label: string; type: string; name: string }) {
+type Values = {
+  ime: string;
+  telefon: string;
+  datum: string;
+  vreme: string;
+  gosti: string;
+};
+
+const EMPTY: Values = { ime: "", telefon: "", datum: "", vreme: "", gosti: "" };
+
+function Field({
+  label,
+  type,
+  name,
+  value,
+  onChange,
+}: {
+  label: string;
+  type: string;
+  name: keyof Values;
+  value: string;
+  onChange: (name: keyof Values, value: string) => void;
+}) {
   return (
     <label className="block text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <input name={name} type={type} required className="mt-1 w-full border border-input bg-background p-3" />
+      <input
+        name={name}
+        type={type}
+        required
+        value={value}
+        onChange={(e) => onChange(name, e.target.value)}
+        className="mt-1 w-full border border-input bg-background p-3"
+      />
     </label>
   );
 }
@@ -32,9 +61,16 @@ function Field({ label, type, name }: { label: string; type: string; name: strin
 function ReservationsPage() {
   const { t } = useLang();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [values, setValues] = useState<Values>(EMPTY);
+
+  const onChange = (name: keyof Values, value: string) =>
+    setValues((v) => ({ ...v, [name]: value }));
+
+  const complete = Object.values(values).every((v) => v.trim() !== "");
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!complete || status === "sending") return;
     setStatus("sending");
     const form = new FormData(e.currentTarget);
     const ok = await sendToFormspree({
@@ -64,17 +100,44 @@ function ReservationsPage() {
 
         <form onSubmit={submit} className="card-warm mt-10 space-y-4 p-7">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label={t("name")} type="text" name="ime" />
-            <Field label={t("phone")} type="tel" name="telefon" />
-            <Field label={t("date")} type="date" name="datum" />
-            <Field label={t("time")} type="time" name="vreme" />
-            <Field label={t("people")} type="number" name="gosti" />
+            <Field label={t("name")} type="text" name="ime" value={values.ime} onChange={onChange} />
+            <Field
+              label={t("phone")}
+              type="tel"
+              name="telefon"
+              value={values.telefon}
+              onChange={onChange}
+            />
+            <Field
+              label={t("date")}
+              type="date"
+              name="datum"
+              value={values.datum}
+              onChange={onChange}
+            />
+            <Field
+              label={t("time")}
+              type="time"
+              name="vreme"
+              value={values.vreme}
+              onChange={onChange}
+            />
+            <Field
+              label={t("people")}
+              type="number"
+              name="gosti"
+              value={values.gosti}
+              onChange={onChange}
+            />
           </div>
           <label className="block text-sm">
             <span className="text-muted-foreground">{t("note")}</span>
             <textarea name="zabeleska" rows={3} className="mt-1 w-full border border-input bg-background p-3" />
           </label>
-          <button disabled={status === "sending"} className="btn-base btn-solid w-full disabled:opacity-60">
+          <button
+            disabled={!complete || status === "sending"}
+            className="btn-base btn-solid w-full disabled:cursor-not-allowed disabled:opacity-50"
+          >
             {status === "sending" ? "…" : t("send")}
           </button>
           {status === "sent" && <p className="text-sm text-primary">{t("sent")}</p>}
