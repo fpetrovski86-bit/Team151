@@ -40,7 +40,7 @@ const GALLERY_IMAGES = [
 
 import { DishCard } from "@/components/site/DishCard";
 import { Reveal } from "@/components/site/Reveal";
-import { MENU } from "@/lib/menu-data";
+import { useMenu } from "@/lib/menu";
 import { useLang } from "@/lib/i18n";
 
 const MAPS_LINK = "https://maps.google.com/?q=41.995896,21.433633";

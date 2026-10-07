@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useLang } from "@/lib/i18n";
-import { MENU } from "@/lib/menu-data";
+import { useMenu } from "@/lib/menu";
 import { menuText } from "@/lib/menu-i18n";
 
 export const Route = createFileRoute("/meni")({
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/meni")({
 
 function MenuPage() {
   const { t, lang } = useLang();
+  const { menu: MENU } = useMenu();
 
   return (
     <main className="section-pad px-5 pt-32">

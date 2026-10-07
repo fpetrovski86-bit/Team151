@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
-import { MENU } from "@/lib/menu-data";
+import { useMenu } from "@/lib/menu";
 import { menuText } from "@/lib/menu-i18n";
 import dionLogo from "@/assets/dion-logo.png";
 
@@ -72,6 +72,7 @@ function Dropdown({
 
 export function TopBar() {
   const { t, lang, setLang } = useLang();
+  const { menu: MENU } = useMenu();
   const [isOpen, setIsOpen] = useState(false);
   const solid = true;
 
