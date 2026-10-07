@@ -7,6 +7,8 @@ const CATEGORIES_URL =
 const ITEMS_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRczSZZS3RY0RkRQqzIwlL6pj4hvZug8VGWKd1Q6G6TPEKm24rtIP7FtGxKl_2QByEY9hVFhxCrHtip/pub?gid=0&single=true&output=csv";
 
+type Row = { kategorija_ime: string; ime_mk: string; namirnici_mk: string; cena: string; slika: string; [k: string]: string };
+
 export type MenuData = Record<"mk" | "en", MenuCategory[]>;
 
 async function load(url: string) {
@@ -17,7 +19,7 @@ async function load(url: string) {
   return rows.slice(1).map((r) => {
     const o: Record<string, string> = {};
     header.forEach((h, i) => (o[h] = (r[i] ?? "").trim()));
-    return o;
+    return o as Row;
   });
 }
 
