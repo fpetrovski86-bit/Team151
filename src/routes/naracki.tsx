@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, type FormEvent } from "react";
 import { useLang } from "@/lib/i18n";
-import { MENU } from "@/lib/menu-data";
+import { useMenu } from "@/lib/menu";
 import { menuText, menuPrice } from "@/lib/menu-i18n";
 import { sendToFormspree } from "@/lib/formspree";
 
@@ -35,11 +35,12 @@ type Line = { name: string; price: number; img: string; qty: number };
 
 function OrdersPage() {
   const { t, lang } = useLang();
+  const { menu: MENU } = useMenu();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [catId, setCatId] = useState(MENU[0]!.id);
+  const [catId, setCatId] = useState("");
   const [lines, setLines] = useState<Line[]>([]);
 
-  const category = useMemo(() => MENU.find((c) => c.id === catId) ?? MENU[0]!, [catId]);
+  const category = useMemo(() => MENU.find((c) => c.id === catId) ?? MENU[0], [catId, MENU]);
   const total = lines.reduce((s, l) => s + l.price * l.qty, 0);
 
   const addItem = (name: string, price: number, img: string) => {
@@ -104,7 +105,7 @@ function OrdersPage() {
             <label className="block text-sm">
               <span className="text-muted-foreground">{t("chooseCategory")}</span>
               <select
-                value={catId}
+                value={category?.id ?? ""}
                 onChange={(e) => setCatId(e.target.value)}
                 className="mt-1 w-full border border-input bg-background p-3 font-display uppercase"
               >
@@ -117,7 +118,7 @@ function OrdersPage() {
             </label>
 
             <ul className="mt-4 max-h-80 space-y-2 overflow-y-auto pr-1">
-              {category.items.map((item) => (
+              {category?.items.map((item) => (
                 <li
                   key={item.name}
                   className="flex items-center gap-3 border border-border bg-background/60 p-2"

@@ -17,7 +17,7 @@ export type ScheduleEvent = {
 
 export type ScheduleData = Record<ScheduleLang, ScheduleEvent[]>;
 
-function parseCsv(text: string): string[][] {
+export function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = "";
