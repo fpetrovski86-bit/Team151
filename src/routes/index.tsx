@@ -45,12 +45,12 @@ import { useLang } from "@/lib/i18n";
 
 const MAPS_LINK = "https://maps.google.com/?q=41.995896,21.433633";
 
-const SPECIALS = [
-  MENU.find((c) => c.id === "skara")?.items[0],
-  MENU.find((c) => c.id === "pica-34cm")?.items[6],
-  MENU.find((c) => c.id === "tradicionalna-hrana")?.items[1],
-  MENU.find((c) => c.id === "deserti")?.items[1],
-].filter(Boolean);
+const SPECIAL_PICKS: [string, number][] = [
+  ["skara", 0],
+  ["pica_34cm", 6],
+  ["tradicionalna_hrana", 1],
+  ["deserti", 1],
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -148,6 +148,11 @@ function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string;
 
 function Home() {
   const { t } = useLang();
+  const { menu: MENU } = useMenu();
+  const SPECIALS = SPECIAL_PICKS.map(([id, i]) => {
+    const items = MENU.find((c) => c.id === id)?.items ?? [];
+    return items[i] ?? items[0];
+  }).filter(Boolean);
 
   return (
     <main>

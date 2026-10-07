@@ -118,7 +118,7 @@ function OrdersPage() {
             </label>
 
             <ul className="mt-4 max-h-80 space-y-2 overflow-y-auto pr-1">
-              {category.items.map((item) => (
+              {category?.items.map((item) => (
                 <li
                   key={item.name}
                   className="flex items-center gap-3 border border-border bg-background/60 p-2"
