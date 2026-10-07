@@ -125,6 +125,15 @@ function Hero() {
           </Link>
         </div>
 
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <Link to="/naracki" className="btn-base btn-solid px-10 py-4 text-base">
+            {t("orderNow")}
+          </Link>
+          <Link to="/rezervacii" className="btn-base btn-solid px-10 py-4 text-base">
+            {t("reserveTable")}
+          </Link>
+        </div>
+
       </div>
     </section>
   );
