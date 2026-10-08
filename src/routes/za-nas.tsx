@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import terraceAsset from "@/assets/about/about-terrace.jpg.asset.json";
-import cuisineAsset from "@/assets/about/about-cuisine.jpg.asset.json";
-import coffeeAsset from "@/assets/about/about-coffee.jpg.asset.json";
+import terraceAsset from "@/assets/about/about-terrace.jpg";
+import cuisineAsset from "@/assets/about/about-cuisine.jpg";
+import coffeeAsset from "@/assets/about/about-coffee.jpg";
 import { Reveal } from "@/components/site/Reveal";
 import { useLang } from "@/lib/i18n";
 
@@ -96,21 +96,21 @@ function AboutPage() {
       <section className="section-pad px-5">
         <div className="mx-auto flex max-w-6xl flex-col gap-24 lg:gap-32">
           <FeatureRow
-            image={terraceAsset.url}
+            image={terraceAsset}
             alt={t("aboutS1Title")}
             title={t("aboutS1Title")}
             text={t("aboutS1Text")}
             imageLeft={false}
           />
           <FeatureRow
-            image={cuisineAsset.url}
+            image={cuisineAsset}
             alt={t("aboutS2Title")}
             title={t("aboutS2Title")}
             text={t("aboutS2Text")}
             imageLeft
           />
           <FeatureRow
-            image={coffeeAsset.url}
+            image={coffeeAsset}
             alt={t("aboutS3Title")}
             title={t("aboutS3Title")}
             text={t("aboutS3Text")}
