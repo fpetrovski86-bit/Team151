@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import terraceAsset from "@/assets/about/about-terrace.jpg.asset.json";
-import cuisineAsset from "@/assets/about/about-cuisine.jpg.asset.json";
-import coffeeAsset from "@/assets/about/about-coffee.jpg.asset.json";
+import terraceAsset from "@/assets/about/about-terrace.jpg";
+import cuisineAsset from "@/assets/about/about-cuisine.jpg";
+import coffeeAsset from "@/assets/about/about-coffee.jpg";
 import { Reveal } from "@/components/site/Reveal";
 import { useLang } from "@/lib/i18n";
 
